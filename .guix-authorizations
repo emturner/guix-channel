@@ -1,0 +1,7 @@
+(authorizations
+ (version 0)
+
+ (("066B 0432 7FAA 2446 7734  05A2 3AC8 5E7E D39F B463"
+   (name "emturner"))
+  ("5DE3 E050 9C47 EA3C F04A  42D3 4AEE 18F8 3AFD EB23"
+   (name "github-web-flow"))))
