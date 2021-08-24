@@ -1,10 +1,10 @@
 (define-module (emturner packages lang ats)
-  #use-module (guix packages)
-  #use-module (gnu packages autotools)
-  #use-module (guix download)
-  #use-module (guix build-system gnu)
-  #use-module (guix utils)
-  #use-module ((guix licenses) #:prefix license:)
+  #:use-module (guix packages)
+  #:use-module (gnu packages autotools)
+  #:use-module (guix download)
+  #:use-module (guix build-system gnu)
+  #:use-module (guix utils)
+  #:use-module ((guix licenses) #:prefix license:)
 
   (define-public ats-anairiats
     (package
