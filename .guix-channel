@@ -1,0 +1,4 @@
+(channel
+  (version 0)
+  (keyring-reference "keyring")
+  (url "https://github.com/emturner/guix-channel.git"))
