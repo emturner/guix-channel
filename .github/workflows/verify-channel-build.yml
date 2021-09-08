@@ -5,6 +5,11 @@ jobs:
     name: Test guix builds of packages in emturner
     runs-on: ubuntu-latest
     steps:
+      - name: Get the current branch name
+        shell: bash
+        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+        id: getbranch
+
       - name: Install Guix
         id: install-guix
         uses: PromyLOPh/guix-install-action@v1
@@ -14,6 +19,7 @@ jobs:
                 (channel
                   (name 'emturner) ;;'
                   (url "https://github.com/emturner/guix-channel.git")
+                  (branch "${{ steps.getbranch.outputs.branch }}")
                   (introduction
                     (make-channel-introduction
                       "ff09271fb183e51609368602ac6d4dc83b4a0692"
