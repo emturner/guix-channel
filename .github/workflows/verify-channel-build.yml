@@ -33,5 +33,6 @@ jobs:
                        (url "https://github.com/guix-mirror/guix.git"))
                       chan))
                   %default-channels))
-      - name: Build ats2
+      - name: Build ats
+        # builds ats1 & ats2 packages
         run: guix build ats2-lang-postiats
