@@ -1,0 +1,31 @@
+name: Verify Channel Build
+on: [push]
+jobs:
+  build-with-this-channel:
+    name: Test guix builds of packages in emturner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Guix
+        id: install-guix
+        uses: PromyLOPh/guix-install-action@v1
+        with:
+          channels: |-
+              (cons*
+                (channel
+                  (name 'emturner) ;;'
+                  (url "https://github.com/emturner/guix-channel.git")
+                  (introduction
+                    (make-channel-introduction
+                      "ff09271fb183e51609368602ac6d4dc83b4a0692"
+                      (openpgp-fingerprint
+                        "3EB3 077F 0DBF 7DA4 0349  6A6E A737 1EB2 0893 82E6"))))
+                ;; use github mirror to decrease load on Savannah
+                (map (lambda (chan)
+                  (if (guix-channel? chan)
+                      (channel
+                       (inherit chan)
+                       (url "https://github.com/guix-mirror/guix.git"))
+                      chan))
+                  %default-channels))
+      - name: Build ats2
+        run: guix build ats2-lang-postiats
