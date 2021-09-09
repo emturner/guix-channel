@@ -1,14 +1,15 @@
 (define-module (emturner packages lang ats)
-  #:use-module (guix packages)
   #:use-module (gnu packages autotools)
-  #:use-module (guix download)
   #:use-module (guix build-system gnu)
-  #:use-module (guix utils)
-  #:use-module ((guix licenses) #:prefix license:))
+  #:use-module (guix download)
+  #:use-module (guix git-download)
+  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (guix packages)
+  #:use-module (guix utils))
 
 (define-public ats-anairiats
   (package
-    (name "ats-lang-anairiats")
+    (name "ats-anairiats")
     (version "0.2.12")
     (source
       (origin
@@ -26,6 +27,16 @@
         #:phases (modify-phases 
                    %standard-phases 
                    (delete 'check)
+                   (add-after
+                     'install
+                     'cpy-src
+                     (lambda* (#:key outputs #:allow-other-keys)
+                              (let* ((out (assoc-ref outputs "out"))
+                                     (tgt (string-append
+                                            out
+                                            "/lib/ats-anairiats-0.2.12/")))
+                                (copy-recursively "." tgt)
+                                #t)))
                    (add-after 'unpack 'rm-test-dirs 
                      (lambda _ 
                        ;; Remove TEST folder - because the tests don't work
@@ -46,43 +57,51 @@
     (license license:gpl3)))
 
 (define-public ats-postiats
-  (package
-    (name "ats2-lang-postiats")
+   (package
+    (name "ats-postiats")
     (version "0.4.2")
     (source
       (origin
-        (method url-fetch)
-        (uri (string-append 
-               "https://sourceforge.net/projects/ats2-lang/"
-               "files/ats2-lang/ats2-postiats-0.4.2/"
-               "ATS2-Postiats-0.4.2.tgz/download"))
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/githwxi/ATS-Postiats")
+               (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
         (sha256
           (base32
-            "1lrl86a1j3705ysvjs5m45khraa6bih6v6fpjwz5w7rjc9gfgf2i"))))
+            "0knk06xwv43dr28fd3kj022j314p348i8xgx7ln5jnzvpgkx0sr3"))
+        ))
     (build-system gnu-build-system)
-    (native-inputs `())
-    (arguments 
+    (native-inputs `(("ats-anairiats" ,ats-anairiats)))
+    (arguments
       `(#:parallel-build? #f
-        #:make-flags `("all")
-        #:phases (modify-phases 
-                   %standard-phases 
+        #:make-flags (list "-f"
+                       "Makefile_devl"
+                       "all"
+                       "ATSHOMERELOC=ATS-0.2.1"
+                       (string-append "ATSHOME="
+                                      (assoc-ref %build-inputs "ats-anairiats"))
+                       (string-append "PATSHOME=" (getcwd) "/source")
+                       "C3NSTRINTKND=intknd")
+        #:phases (modify-phases
+                   %standard-phases
+                   (delete 'configure)
                    (delete 'check)
-                   (add-after 'unpack 'rm-doc-dirs 
-                     (lambda _ 
-                       ;; Remove DOCUGEN folders - because this breaks 
-                       ;; the strip binaries step for some reason
-                       (invoke "find" 
-                               "." 
-                               "-depth"
-                               "-name"
-                               "DOCUGEN"
-                               "-execdir"
-                               "rm"
-                               "-r"
-                               "{}"
-                               "+"))))))
-
+                   (replace 'install
+                     (lambda* (#:key outputs #:allow-other-keys)
+                              (let* ((out (assoc-ref outputs "out"))
+                                     (tgt (string-append
+                                            out
+                                            "")))
+                                (copy-recursively "." tgt)
+                                #t)))
+                   (add-before 'build 'make-makefiles-writeable
+                      (lambda _
+                        (for-each make-file-writable (find-files "." "^Makefile$"))))
+                   )))
     (home-page "http://www.ats-lang.org/")
-    (synopsis "ATS2: Unleashing the Potentials of Types and Templates")
-    (description "A Programming Language System to Unleash the Potentials of Types and Templates")
-    (license license:gpl3)))
+    (synopsis "A Programming Language System to Unleash the Potentials of Types and Templates")
+    (description "ATS/Postiats (or ATS2/Postiats) is the name for the current compiler of ATS2, the successor of ATS (or ATS1).")
+    (license license:gpl3))) 
+
+ats-postiats

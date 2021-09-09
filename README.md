@@ -1,5 +1,8 @@
-# guix-channel
-A collection of extra packages I use with Guix
+# About
+`guix-channel` is a collection of extra packages I use with Guix
+
+# Build status
+![Package builds](https://github.com/emturner/guix-channel/actions/workflows/verify-channel-build.yml/badge.svg)
 
 # Installation
 `emturner/guix-channel` can be added as a [Guix channel](https://guix.gnu.org/manual/en/html_node/Channels.html), by modifying `~/.config/guix/channels.scm`:
