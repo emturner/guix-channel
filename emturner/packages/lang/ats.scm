@@ -103,5 +103,3 @@
     (synopsis "A Programming Language System to Unleash the Potentials of Types and Templates")
     (description "ATS/Postiats (or ATS2/Postiats) is the name for the current compiler of ATS2, the successor of ATS (or ATS1).")
     (license license:gpl3))) 
-
-ats-postiats
