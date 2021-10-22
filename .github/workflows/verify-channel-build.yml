@@ -37,3 +37,5 @@ jobs:
         run: guix build ats-anairiats
       - name: Build ATS2
         run: guix build ats-postiats
+      - name: Build starship
+        run: guix build starship
