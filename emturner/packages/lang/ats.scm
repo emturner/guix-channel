@@ -14,7 +14,7 @@
     (source
       (origin
         (method url-fetch)
-        (uri (string-append 
+        (uri (string-append
                "https://sourceforge.net/projects/ats-lang/files/ats-lang/anairiats-"
                version "/" name "-" version ".tgz/download"))
         (sha256
@@ -22,10 +22,10 @@
             "0l2kj1fzhxwsklwmn5yj2vp9rmw4jg0b18bzwqz72bfi8i39736k"))))
     (build-system gnu-build-system)
     (native-inputs `())
-    (arguments 
+    (arguments
       `(#:make-flags `()
-        #:phases (modify-phases 
-                   %standard-phases 
+        #:phases (modify-phases
+                   %standard-phases
                    (delete 'check)
                    (add-after
                      'install
@@ -37,12 +37,12 @@
                                             "/lib/ats-anairiats-0.2.12/")))
                                 (copy-recursively "." tgt)
                                 #t)))
-                   (add-after 'unpack 'rm-test-dirs 
-                     (lambda _ 
+                   (add-after 'unpack 'rm-test-dirs
+                     (lambda _
                        ;; Remove TEST folder - because the tests don't work
                        ;; and trying to not build them is a pain.
-                       (invoke "find" 
-                               "." 
+                       (invoke "find"
+                               "."
                                "-depth"
                                "-name"
                                "TEST"
@@ -68,9 +68,7 @@
                (commit (string-append "v" version))))
         (file-name (git-file-name name version))
         (sha256
-          (base32
-            "0knk06xwv43dr28fd3kj022j314p348i8xgx7ln5jnzvpgkx0sr3"))
-        ))
+          (base32 "0knk06xwv43dr28fd3kj022j314p348i8xgx7ln5jnzvpgkx0sr3"))))
     (build-system gnu-build-system)
     (native-inputs `(("ats-anairiats" ,ats-anairiats)))
     (arguments
@@ -100,6 +98,8 @@
                         (for-each make-file-writable (find-files "." "^Makefile$"))))
                    )))
     (home-page "http://www.ats-lang.org/")
-    (synopsis "A Programming Language System to Unleash the Potentials of Types and Templates")
-    (description "ATS/Postiats (or ATS2/Postiats) is the name for the current compiler of ATS2, the successor of ATS (or ATS1).")
-    (license license:gpl3))) 
+    (synopsis "A Programming Language System to Unleash the 
+Potentials of Types and Templates")
+    (description "ATS/Postiats (or ATS2/Postiats) is the name
+for the current compiler of ATS2, the successor of ATS (or ATS1).")
+    (license license:gpl3)))
