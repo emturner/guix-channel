@@ -95,10 +95,9 @@
                                 #t)))
                    (add-before 'build 'make-makefiles-writeable
                       (lambda _
-                        (for-each make-file-writable (find-files "." "^Makefile$"))))
-                   )))
+                        (for-each make-file-writable (find-files "." "^Makefile$")))))))
     (home-page "http://www.ats-lang.org/")
-    (synopsis "A Programming Language System to Unleash the 
+    (synopsis "A Programming Language System to Unleash the
 Potentials of Types and Templates")
     (description "ATS/Postiats (or ATS2/Postiats) is the name
 for the current compiler of ATS2, the successor of ATS (or ATS1).")
