@@ -38,4 +38,4 @@ jobs:
       - name: Lint ATS2
         run: rm tmp; guix lint ats-postiats --no-network > tmp && [ ! -s tmp ]
       - name: Lint starship
-        run: rm tmp; guix lint starship > tmp && [ ! -s tmp ]
+        run: rm tmp; guix lint starship --no-network > tmp && [ ! -s tmp ]
