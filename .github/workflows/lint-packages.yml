@@ -36,6 +36,8 @@ jobs:
       - name: Lint ATS1
         run: guix lint ats-anairiats --no-network > tmp && [ ! -s tmp ]
       - name: Lint ATS2
-        run: rm tmp; guix lint ats-postiats --no-network > tmp && [ ! -s tmp ]
+        run: guix lint ats-postiats --no-network > tmp && [ ! -s tmp ]
       - name: Lint starship
-        run: rm tmp; guix lint starship --no-network > tmp && [ ! -s tmp ]
+        run: guix lint starship --no-network > tmp && [ ! -s tmp ]
+      - name: Lint rust-git-delta
+        run: guix lint rust-git-delta --no-network > tmp && [ ! -s tmp ]
