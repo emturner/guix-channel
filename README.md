@@ -2,7 +2,7 @@
 `guix-channel` is a collection of extra packages I use with Guix
 
 # Build status
-![Package builds](https://github.com/emturner/guix-channel/actions/workflows/verify-channel-build.yml/badge.svg)
+![Package lints](https://github.com/emturner/guix-channel/actions/workflows/lint-packages.yml/badge.svg)
 
 # Installation
 `emturner/guix-channel` can be added as a [Guix channel](https://guix.gnu.org/manual/en/html_node/Channels.html), by modifying `~/.config/guix/channels.scm`:
@@ -12,6 +12,7 @@
   (channel
     (name 'emturner)
     (url "https://github.com/emturner/guix-channel.git")
+    (branch "main")
     (introduction
       (make-channel-introduction
         "ff09271fb183e51609368602ac6d4dc83b4a0692"
