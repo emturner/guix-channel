@@ -1990,8 +1990,7 @@ according to XDG Base Directory specification")
             "0ggqdrmb2jg58pg5ysbm4gv5v359js8kqxsd1vmnzgdxj1v0kkjn"))))
     (build-system cargo-build-system)
     (arguments
-      `(#:rust ,rust-1.52 ; rust-zvariant-derive uses resolver = 2
-        #:tests? #f
+      `(#:tests? #f
         #:cargo-inputs
         (("rust-ansi-term" ,rust-ansi-term-0.12)
          ("rust-attohttpc" ,rust-attohttpc-0.17)
@@ -2072,8 +2071,7 @@ any shell! â\x98\x84ð\x9f\x8c\x8cï¸\x8f")
     (arguments
       ; rust-bitflags-1.3.2 requires 1.46 (if in const fn)
       ; rust-git-delta requires 1.47 (inner_deref)
-      `(#:rust ,rust-1.47
-        #:cargo-inputs
+      `(#:cargo-inputs
         (("rust-ansi-colours" ,rust-ansi-colours-1)
          ("rust-ansi-term" ,rust-ansi-term-0.12)
          ("rust-atty" ,rust-atty-0.2)
