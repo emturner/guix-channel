@@ -1,5 +1,8 @@
 name: Lint Channel Packages
-on: [push]
+on: 
+  push:
+  schedule:
+  - cron: "0 0 * * *"
 jobs:
   pull-and-lint-this-channel:
     name: Run guix lint on packages in emturner
