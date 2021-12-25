@@ -70,7 +70,7 @@
         (sha256
           (base32 "0knk06xwv43dr28fd3kj022j314p348i8xgx7ln5jnzvpgkx0sr3"))))
     (build-system gnu-build-system)
-    (native-inputs `(("ats-anairiats" ,ats-anairiats)))
+    (native-inputs (list ats-anairiats))
     (arguments
       `(#:parallel-build? #f
         #:make-flags (list "-f"

@@ -2043,10 +2043,9 @@ according to XDG Base Directory specification")
         (("rust-mockall" ,rust-mockall-0.10)
          ("rust-tempfile" ,rust-tempfile-3))))
     (native-inputs
-      `(("pkg-config" ,pkg-config)))
+      (list pkg-config))
     (inputs
-      `(("openssl" ,openssl)
-        ("zlib", zlib)))
+      (list openssl zlib))
     (home-page "https://starship.rs")
     (synopsis
       "The minimal, blazing-fast, and infinitely customizable prompt for
@@ -2097,9 +2096,9 @@ any shell! â\x98\x84ð\x9f\x8c\x8cï¸\x8f")
          ("rust-vte" ,rust-vte-0.10)
          ("rust-xdg" ,rust-xdg-2))))
       (inputs
-       `(("zlib" ,zlib)))
+       (list zlib))
       (native-inputs
-        `(("git" ,git))) ;; For the tests
+        (list git)) ;; For the tests
     (home-page "https://github.com/dandavison/delta")
     (synopsis "A syntax-highlighting pager for git")
     (description "This package provides a syntax-highlighting pager
