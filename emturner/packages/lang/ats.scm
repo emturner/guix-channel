@@ -1,5 +1,4 @@
 (define-module (emturner packages lang ats)
-  #:use-module (gnu packages autotools)
   #:use-module (guix build-system gnu)
   #:use-module (guix download)
   #:use-module (guix git-download)
@@ -9,7 +8,7 @@
 
 (define-public ats-anairiats
   (package
-    (name "ats-anairiats")
+    (name "ats-lang-anairiats")
     (version "0.2.12")
     (source
       (origin
@@ -17,6 +16,7 @@
         (uri (string-append
                "https://sourceforge.net/projects/ats-lang/files/ats-lang/anairiats-"
                version "/" name "-" version ".tgz/download"))
+        (file-name "download.tgz")
         (sha256
           (base32
             "0l2kj1fzhxwsklwmn5yj2vp9rmw4jg0b18bzwqz72bfi8i39736k"))))
@@ -78,7 +78,7 @@
                        "all"
                        "ATSHOMERELOC=ATS-0.2.1"
                        (string-append "ATSHOME="
-                                      (assoc-ref %build-inputs "ats-anairiats"))
+                                      (assoc-ref %build-inputs "ats-lang-anairiats"))
                        (string-append "PATSHOME=" (getcwd) "/source")
                        "C3NSTRINTKND=intknd")
         #:phases (modify-phases
@@ -102,3 +102,5 @@ Potentials of Types and Templates")
     (description "ATS/Postiats (or ATS2/Postiats) is the name
 for the current compiler of ATS2, the successor of ATS (or ATS1).")
     (license license:gpl3)))
+
+ats-postiats
