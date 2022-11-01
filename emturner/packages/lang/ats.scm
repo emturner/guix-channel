@@ -1,5 +1,6 @@
 (define-module (emturner packages lang ats)
   #:use-module (guix build-system gnu)
+  #:use-module (guix build-system emacs)
   #:use-module (guix download)
   #:use-module (guix git-download)
   #:use-module ((guix licenses) #:prefix license:)
@@ -103,4 +104,23 @@ Potentials of Types and Templates")
 for the current compiler of ATS2, the successor of ATS (or ATS1).")
     (license license:gpl3)))
 
-ats-postiats
+(define-public emacs-ats2
+  (package
+    (name "emacs-ats2")
+    (version "0e9da7ef6c9707f2689bbe54e77147a1e6f3a30e")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://github.com/mrd/ats2-mode")
+                    (commit version)))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "00w315rwfkmc8vx65g1qc2lz5dm78wk0ncmq544z2rp9gkjh70hx"))))
+    (build-system emacs-build-system)
+    (home-page "https://github.com/mrd/ats2-mode")
+    (synopsis "Mode for editing ATS2 (ATS-Postiats) code.")
+    (description "Mode for editing ATS2 (ATS-Postiats) code.")
+    (license license:gpl3+)))
+
+emacs-ats2
