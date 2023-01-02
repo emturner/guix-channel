@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2022 Emma Turner
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # About
 `guix-channel` is a collection of extra packages I use with Guix
 

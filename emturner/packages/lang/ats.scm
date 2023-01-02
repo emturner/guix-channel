@@ -1,3 +1,7 @@
+; SPDX-FileCopyrightText: 2022 Emma Turner
+;
+; SPDX-License-Identifier: GPL-3.0-or-later
+
 (define-module (emturner packages lang ats)
   #:use-module (guix build-system gnu)
   #:use-module (guix download)
